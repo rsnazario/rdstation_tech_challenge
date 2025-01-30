@@ -26,7 +26,7 @@ class CartsController < ApplicationController
 
       render json: cart_response(@cart), status: :ok
     else
-      render json: { error: 'Product should already exist in the cart!' }, status: :unprocessable_entity
+      render json: { cart: cart_response(@cart), error: 'Product should already exist in the cart!' }, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +40,7 @@ class CartsController < ApplicationController
 
       render json: { cart: cart_response(@cart), message: 'Product removed from cart' }, status: :ok
     else
-      render json: { error: 'Product not found in cart' }, status: :not_found
+      render json: { cart: cart_response(@cart), error: 'Product not found in cart' }, status: :not_found
     end
   end
 
@@ -51,7 +51,7 @@ class CartsController < ApplicationController
   end
 
   def set_cart
-    @cart = session[:cart_id].present? ? Cart.find(session[:cart_id]) : Cart.create!(total_price: 0)
+    @cart = Cart.find_by(id: session[:cart_id]) || Cart.create!(total_price: 0)
     session[:cart_id] = @cart.id
   end
 
