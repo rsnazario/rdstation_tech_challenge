@@ -11,7 +11,7 @@ RSpec.describe CartsController, type: :routing do
     end
 
     it 'routes to #add_item via PUT' do
-      expect(put: '/cart/add_item').to route_to('carts#add_item')
+      expect(post: '/cart/add_items').to route_to('carts#add_items')
     end
 
     it 'routes to #remove_product via DELETE' do
