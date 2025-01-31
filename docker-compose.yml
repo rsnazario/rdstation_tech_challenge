@@ -22,7 +22,7 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - .:/rails
+      - .:/usr/src/app
       - bundle:/usr/local/bundle
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/myapp_development
